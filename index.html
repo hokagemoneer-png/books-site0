@@ -1,97 +1,200 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصتي الثقافية - للنشر المفتوح</title>
+    <title data-lang-ar="منصتي الثقافية العالمية" data-lang-en="Global Cultural Platform">منصتي الثقافية العالمية</title>
     <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+            --accent: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: 0.3s;
         }
         header {
-            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 40px 20px;
             text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+        .lang-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
         }
         .container {
-            max-width: 900px;
+            max-width: 1050px;
             margin: 30px auto;
             padding: 20px;
         }
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
         .section-title {
             font-size: 1.5em;
-            margin-bottom: 15px;
-            color: #2c3e50;
-            border-bottom: 2px solid #4ca1af;
-            padding-bottom: 5px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
             margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .card h3 {
-            margin-top: 0;
-            color: #2c3e50;
+            color: var(--primary);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            font-weight: bold;
         }
         .btn {
             display: inline-block;
-            background-color: #4ca1af;
+            background-color: var(--primary);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-weight: bold;
-            margin-top: 10px;
             cursor: pointer;
             border: none;
+            transition: 0.2s;
         }
         .btn:hover {
-            background-color: #3b8b97;
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
-        .article-view {
-            display: none;
-            background: white;
-            padding: 30px;
+        .btn-vip {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            font-size: 1em;
+            outline: none;
         }
-        .back-btn {
-            background-color: #e74c3c;
-            margin-bottom: 20px;
+
+        .editor-wrapper {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
         }
-        .back-btn:hover {
-            background-color: #c0392b;
+        .editor-toolbar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            background: #e2e8f0;
+            padding: 8px;
+            border-radius: 6px;
         }
-        form input, form textarea {
+        .editor-toolbar button, .editor-toolbar select {
+            padding: 5px 10px;
+            background: white;
+            color: var(--text);
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .editable-area {
+            min-height: 140px;
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            border-radius: 6px;
+            background: white;
+            color: var(--text);
+            outline: none;
+        }
+        input, textarea, select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             box-sizing: border-box;
+            background: white;
+            color: var(--text);
+        }
+        .vip-box {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px dashed #f59e0b;
+        }
+        .vip-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .feature-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #fde68a;
+            font-size: 0.95em;
+        }
+        .article-grid {
+            display: grid;
+            gap: 20px;
+        }
+        .article-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 5px solid var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .admin-badge {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            border: 1px solid #fde68a;
+        }
+        .discount-badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            border: 1px solid #bfdbfe;
         }
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
+            padding: 25px;
+            background-color: #1e293b;
+            color: #94a3b8;
             margin-top: 40px;
         }
     </style>
@@ -99,91 +202,186 @@
 <body>
 
     <header>
-        <h1>منصتي الثقافية</h1>
-        <p>مساحة حرة لكل كاتب وقارئ لنشر المعرفة والإبداع</p>
+        <div class="lang-switcher">
+            <button onclick="toggleLanguage()">🌐 EN / AR</button>
+        </div>
+        <h1 id="t-title">منصتي الثقافية العالمية</h1>
+        <p id="t-subtitle">انشر إبداعاتك، صمم قصتك، وشارك كتبك مع العالم بكل حرية</p>
     </header>
 
     <div class="container">
         
-        <!-- الصفحة الرئيسية -->
-        <div id="home-section">
-            <div class="card">
-                <h3>أهلاً بك في منصة النشر المفتوح</h3>
-                <p>تصفح المقالات أدناه، أو انشر إبداعك معنا بكل سهولة.</p>
-            </div>
+        <!-- شريط البحث السريع -->
+        <div class="search-box">
+            <input type="text" id="searchInput" onkeyup="searchArticles()" placeholder="ابحث عن مقالة، قصة، أو كتاب معين...">
+        </div>
 
-            <div class="section-title">أحدث المقالات والكتب</div>
+        <!-- قسم الاشتراك الشهري والميزات الخرافية VIP -->
+        <div class="card vip-box">
+            <h2 style="color: #b45309; margin-top:0;">⭐ مميزات عضوية الـ VIP (20$ / شهرياً)</h2>
+            <p style="color: #78350f;">ارتقِ بمشروعك وافتح أبواب الإبداع اللامحدود مع ميزاتنا الخارقة:</p>
             
-            <div class="card">
-                <h3>رحلة في عالم البرمجة والتقنية</h3>
-                <p>اسم الكاتب: محمد أحمد</p>
-                <p>نبذة عن المقال: كيف تبدأ أولى خطواتك في عالم تطوير المواقع وتصميم الواجهات البرمجية...</p>
-                <button class="btn" onclick="openArticle('article1')">قراءة المقال كاملًا</button>
+            <div class="vip-features">
+                <div class="feature-item">🎨 <b>تصميم كرتون وأنيماشن:</b> حول قصتك إلى رسومات وشخصيات كرتونية.</div>
+                <div class="feature-item">📢 <b>صانع الإعلانات:</b> تصميم إعلانات احترافية ومبتكرة لترويج كتبك.</div>
+                <div class="feature-item">✂️ <b>قص وتركيب الصور:</b> أداة ذكية لتعديل الأغلفة والصور باحترافية.</div>
+                <div class="feature-item">👾 <b>محرر بكسل (Pixel Art):</b> ارسم تصاميم كلاسيكية فريدة من نوعها.</div>
+                <div class="feature-item">💎 <b>محرر نصي مطور:</b> تحكم كامل بالخطوط والألوان والتنسيقات العالمية.</div>
+                <div class="feature-item">🏷️ <b>خصومات حصرية:</b> استفد من تخفيضات الكتب التي تبدأ من 20% وتصل حتى 50%!</div>
             </div>
 
-            <div class="card">
-                <h3>أسرار القراءة الذكية</h3>
-                <p>اسم الكاتب: سارة خالد</p>
-                <p>نبذة عن المقال: كيف تستفيد أقصى استفادة من كل كتاب تقرأه وتثبت المعلومات في ذهنك...</p>
-                <button class="btn" onclick="openArticle('article2')">قراءة المقال كاملًا</button>
-            </div>
+            <button class="btn btn-vip" onclick="alert('جاري تجهيز محفظتك الآمنة وبوابة الدفع (Stripe / PayPal) لتفعيل حسابك وسحب أرباحك بكل سهولة!')">اشترك الآن في باقة VIP</button>
+        </div>
 
-            <!-- قسم إرسال المقالات (مرتبط بـ Formspree الخاص بك) -->
-            <div class="section-title" style="margin-top: 40px;">هل أنت كاتب؟ أرسل مقالك أو كتابك</div>
-            <div class="card" style="background-color: #e8f4f8;">
-                <h3>شاركنا عملك القادم</h3>
-                <p>املأ التفاصيل أدناه وسيتم إرسالها مباشرة إلى بريدك الإلكتروني:</p>
+        <!-- مركز النشر الفوري والمحرر الجانبي -->
+        <div class="section-title" id="t-publish-sec">مركز النشر والتأليف</div>
+        <div class="card">
+            <h3 id="t-pub-heading">انشر كتابك أو مقالك الآن فوراً</h3>
+            <p id="t-pub-sub" style="color: var(--text-muted);">املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP (من 20% كحد أدنى إلى 50% كحد أقصى):</p>
+            
+            <form id="publishForm" onsubmit="publishArticle(event)">
+                <input type="text" id="input-name" placeholder="اسم الكاتب أو المؤلف" required>
+                <input type="text" id="input-title" placeholder="عنوان المقال أو القصة أو الكتاب" required>
                 
-                <form action="https://formspree.io/f/xnpqwvow" method="POST">
-                    <input type="text" name="writerName" placeholder="اسم الكاتب ثلاثي" required>
-                    <input type="email" name="writerEmail" placeholder="بريدك الإلكتروني (للتواصل معك)" required>
-                    <input type="text" name="articleTitle" placeholder="عنوان المقال أو الكتاب" required>
-                    <textarea name="articleContent" rows="5" placeholder="اكتب محتوى مقالك أو نبذة عن كتابك هنا..." required></textarea>
-                    <button type="submit" class="btn">إرسال للمراجعة والنشر</button>
-                </form>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="input-price" placeholder="السعر (مثلاً: مجاناً أو 10$)" required style="flex:1;">
+                    <select id="input-discount" style="flex:1;" required>
+                        <option value="" disabled selected>اختر نسبة خصم VIP (من 20% إلى 50%)</option>
+                        <option value="20%">خصم 20% لمشتركي VIP</option>
+                        <option value="25%">خصم 25% لمشتركي VIP</option>
+                        <option value="30%">خصم 30% لمشتركي VIP</option>
+                        <option value="35%">خصم 35% لمشتركي VIP</option>
+                        <option value="40%">خصم 40% لمشتركي VIP</option>
+                        <option value="45%">خصم 45% لمشتركي VIP</option>
+                        <option value="50%">خصم 50% لمشتركي VIP</option>
+                    </select>
+                </div>
+
+                <!-- محرر النصوص (شبه الوورد في صندوق مرتب وجانبي) -->
+                <div class="editor-wrapper">
+                    <label style="font-weight: bold; display:block; margin-bottom:5px; color: var(--primary);" id="t-editor-label">محرر النصوص (شبه الوورد المطور):</label>
+                    <div class="editor-toolbar">
+                        <button type="button" onclick="formatText('bold')"><b>B</b> (غامق)</button>
+                        <button type="button" onclick="formatText('italic')"><i>I</i> (مائل)</button>
+                        <button type="button" onclick="formatText('underline')"><u>U</u> (تحته خط)</button>
+                        <select onchange="formatDoc('fontSize', this.value)">
+                            <option value="3">حجم الخط</option>
+                            <option value="4">متوسط</option>
+                            <option value="5">كبير</option>
+                        </select>
+                    </div>
+                    <div id="wordEditor" class="editable-area" contenteditable="true">اكتب نص قصتك، كتابك، أو إعلانك هنا بكل حرية...</div>
+                </div>
+
+                <button type="submit" class="btn" style="margin-top: 15px;" id="t-submit-btn">نشر فوري على الموقع</button>
+            </form>
+        </div>
+
+        <!-- قائمة الكتب والمقالات -->
+        <div class="section-title" id="t-latest">أحدث الكتب والمقالات المنشورة</div>
+        <div id="articlesContainer" class="article-grid">
+            <div class="article-item">
+                <h3>رحلة في عالم البرمجة المتقدمة</h3>
+                <p><strong style="color: var(--text-muted);">الكاتب:</strong> محمد أحمد | <strong style="color: var(--primary);">السعر:</strong> 10$ | <span class="discount-badge">خصم VIP: 40%</span></p>
+                <p>كيف تبني منصة ضخمة وتدير خوادمك بأمان تام...</p>
+                <div style="margin-top: 10px; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <span class="admin-badge">تقييم الإدارة: 10 / 10</span>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--primary);">تعليق المدير: محتوى رائع جداً ومقبول للنشر الفوري!</p>
+                </div>
             </div>
-        </div>
-
-        <!-- صفحة قراءة المقال الأول -->
-        <div id="article1" class="article-view">
-            <button class="btn back-btn" onclick="goHome()">← العودة للرئيسية</button>
-            <h2>رحلة في عالم البرمجة والتقنية</h2>
-            <p><strong>الكاتب:</strong> محمد أحمد</p>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-            <p>هنا ينزل نص المقال الكامل الخاص بمحمد أحمد. يتحدث المقال عن أهمية تعلم لغات البرمجة وكيف يمكن للمطور الصغير بناء مشاريع رائعة باستخدام أدوات بسيطة مثل VS Code و GitHub Pages دون الحاجة لخبرة معقدة أو تكاليف مادية...</p>
-        </div>
-
-        <!-- صفحة قراءة المقال الثاني -->
-        <div id="article2" class="article-view">
-            <button class="btn back-btn" onclick="goHome()">← العودة للرئيسية</button>
-            <h2>أسرار القراءة الذكية</h2>
-            <p><strong>الكاتب:</strong> سارة خالد</p>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-            <p>هنا ينزل النص الكامل لمقال سارة خالد. القراءة ليست مجرد مرور عابر على الكلمات، بل هي تفاعل عقلي عميق يساعد على بناء شخصية قوية وتوسيع مدارك الفهم والمعرفة في شتى مجالات الحياة...</p>
         </div>
 
     </div>
 
     <footer>
-        <p>جميع الحقوق محفوظة © 2026 - منصتي الثقافية</p>
+        <p id="t-footer">جميع الحقوق محفوظة © 2026 - منصتي الثقافية العالمية</p>
     </footer>
 
     <script>
-        function openArticle(articleId) {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('article1').style.display = 'none';
-            document.getElementById('article2').style.display = 'none';
-            document.getElementById(articleId).style.display = 'block';
-            window.scrollTo(0, 0);
+        function formatText(command) {
+            document.execCommand(command, false, null);
+        }
+        function formatDoc(command, value) {
+            document.execCommand(command, false, value);
         }
 
-        function goHome() {
-            document.getElementById('article1').style.display = 'none';
-            document.getElementById('article2').style.display = 'none';
-            document.getElementById('home-section').style.display = 'block';
-            window.scrollTo(0, 0);
+        // نشر المقال بشكل فوري مع نسبة الخصم
+        function publishArticle(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('input-name').value;
+            const title = document.getElementById('input-title').value;
+            const price = document.getElementById('input-price').value;
+            const discount = document.getElementById('input-discount').value;
+            const content = document.getElementById('wordEditor').innerHTML;
+
+            const container = document.getElementById('articlesContainer');
+            const newArticle = document.createElement('div');
+            newArticle.className = 'article-item';
+            newArticle.innerHTML = `
+                <h3>${title}</h3>
+                <p><strong style="color: var(--text-muted);">الكاتب:</strong> ${name} | <strong style="color: var(--primary);">السعر:</strong> ${price} | <span class="discount-badge">خصم VIP: ${discount}</span></p>
+                <div>${content}</div>
+                <div style="margin-top: 10px; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <span class="admin-badge">تقييم الإدارة: 10 / 10</span>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--primary);">تعليق المدير: تم اعتماد النشر الفوري، عمل ممتاز!</p>
+                </div>
+            `;
+
+            container.prepend(newArticle);
+            document.getElementById('publishForm').reset();
+            document.getElementById('wordEditor').innerHTML = 'اكتب نص قصتك، كتابك، أو إعلانك هنا بكل حرية...';
+            alert('تم نشر عملك بنجاح وأصبح متاحاً لكل الزوار مع نسبة الخصم المحددة!');
+        }
+
+        // محرك البحث الفوري
+        function searchArticles() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let articles = document.getElementsByClassName('article-item');
+            
+            for (let i = 0; i < articles.length; i++) {
+                let text = articles[i].innerText.toLowerCase();
+                if (text.includes(input)) {
+                    articles[i].style.display = "";
+                } else {
+                    articles[i].style.display = "none";
+                }
+            }
+        }
+
+        let currentLang = 'ar';
+        function toggleLanguage() {
+            const root = document.getElementById('html-root');
+            if (currentLang === 'ar') {
+                currentLang = 'en';
+                root.setAttribute('dir', 'ltr');
+                root.setAttribute('lang', 'en');
+                document.getElementById('t-title').innerText = "Global Cultural Platform";
+                document.getElementById('t-subtitle').innerText = "Publish your creations, design stories, and share books globally";
+                document.getElementById('searchInput').placeholder = "Search for an article, story, or book...";
+                document.getElementById('t-publish-sec').innerText = "Publishing Center";
+                document.getElementById('t-pub-heading').innerText = "Publish Your Book or Article Instantly";
+                document.getElementById('t-pub-sub').innerText = "Fill in details, set price and VIP discount (from 20% to 50%):";
+                document.getElementById('t-editor-label').innerText = "Text Editor (Advanced Word):";
+                document.getElementById('t-submit-btn').innerText = "Publish Instantly Live";
+                document.getElementById('t-latest').innerText = "Latest Published Books & Articles";
+                document.getElementById('t-footer').innerText = "All Rights Reserved © 2026 - Global Cultural Platform";
+            } else {
+                currentLang = 'ar';
+                root.setAttribute('dir', 'rtl');
+                root.setAttribute('lang', 'ar');
+                document.getElementById('t-title').innerText = "منصتي الثقافية العالمية";
+                document.getElementById('t-subtitle').innerText = "انشر إبداعاتك، صمم قصتك، وشارك كتبك مع العالم بكل حرية";
+                document.getElementById('searchInput').placeholder = "ابحث عن مقالة، قصة، أو كتاب معين...";
+                document.getElementById('t-publish-sec').innerText = "مركز النشر والتأليف";
+                document.getElementById('t-pub-heading').innerText = "انشر كتابك أو مقالك الآن فوراً";
+                document.getElementById('t-pub-sub').innerText = "املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP (من 20% كحد أدنى إلى 50% كحد أقصى):";
+                document.getElementById('t-editor-label').innerText = "محرر النصوص (شبه الوورد المطور):";
+                document.getElementById('t-submit-btn').innerText = "نشر فوري على الموقع";
+                document.getElementById('t-latest').innerText = "أحدث الكتب والمقالات المنشورة";
+                document.getElementById('t-footer').innerText = "جميع الحقوق محفوظة © 2026 - منصتي الثقافية العالمية";
+            }
         }
     </script>
-
 </body>
 </html>
