@@ -14,6 +14,7 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: #334155;
+            --success: #22c55e;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -47,7 +48,7 @@
         }
         .taskbar-menu {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
         }
         .taskbar-menu button, .taskbar-menu a {
@@ -66,25 +67,24 @@
             background: var(--accent-glow);
         }
 
-        /* ورد زوايا الموقع (موزع بيسار ويسار ووسط بشكل ديكوري) */
+        /* زوايا الورد والتحكم الجانبي */
         .corner-rose-right, .corner-rose-left {
             position: fixed;
-            font-size: 2.5em;
+            font-size: 2.2em;
             z-index: 99;
-            opacity: 0.8;
+            opacity: 0.75;
             pointer-events: none;
-            filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.4));
+            filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.4));
         }
-        .corner-rose-right { top: 80px; right: 20px; transform: rotate(15deg); }
-        .corner-rose-left { bottom: 30px; left: 20px; transform: rotate(-15deg); }
+        .corner-rose-right { top: 75px; right: 15px; transform: rotate(15deg); }
+        .corner-rose-left { bottom: 20px; left: 15px; transform: rotate(-15deg); }
 
         .container {
-            max-width: 1050px;
+            max-width: 1100px;
             margin: 30px auto;
             padding: 20px;
         }
 
-        /* كروت الواجهة المظلمة */
         .card {
             background: var(--bg-card);
             padding: 25px;
@@ -122,6 +122,33 @@
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
         }
+        .btn-cart {
+            background: #22c55e;
+            color: white;
+        }
+
+        /* نظام التبويبات للأقسام المختلفة */
+        .tabs-header {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent);
+            color: #0f172a;
+            border-color: var(--accent);
+        }
 
         /* صندوق البحث */
         .search-box {
@@ -139,11 +166,8 @@
             color: white;
             outline: none;
         }
-        .search-box input:focus {
-            border-color: var(--accent);
-        }
 
-        /* قسم البروفايل الشخصي للكاتب */
+        /* بروفايل الكاتب */
         .profile-card {
             display: flex;
             align-items: center;
@@ -165,7 +189,7 @@
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* محرر النصوص الجانبي */
+        /* محرر النصوص الجانبي والزوايا */
         .editor-wrapper {
             background: #0f172a;
             border: 1px solid var(--border);
@@ -193,7 +217,7 @@
             font-weight: bold;
         }
         .editable-area {
-            min-height: 140px;
+            min-height: 120px;
             border: 1px solid var(--border);
             padding: 12px;
             border-radius: 6px;
@@ -211,7 +235,7 @@
             background: #0f172a;
             color: var(--text-main);
         }
-        input:focus, select:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: var(--accent);
             outline: none;
         }
@@ -233,6 +257,7 @@
             border: 1px solid #453514;
             font-size: 0.95em;
         }
+        
         .article-grid {
             display: grid;
             gap: 20px;
@@ -246,14 +271,13 @@
             border-left: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
         }
-        .admin-badge {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--vip-gold);
-            padding: 4px 10px;
+        .badge-type {
+            background: #3b82f6;
+            color: white;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 0.85em;
+            font-size: 0.8em;
             font-weight: bold;
-            border: 1px solid rgba(245, 158, 11, 0.3);
         }
         .discount-badge {
             background: rgba(56, 189, 248, 0.15);
@@ -264,6 +288,26 @@
             font-weight: bold;
             border: 1px solid rgba(56, 189, 248, 0.3);
         }
+
+        /* صندوق الدردشة والتواصل بين الأعضاء والكتّاب */
+        .chat-box {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .chat-messages {
+            height: 150px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            background: #090d16;
+            font-size: 0.9em;
+        }
+
         footer {
             text-align: center;
             padding: 25px;
@@ -276,19 +320,20 @@
 </head>
 <body>
 
-    <!-- ورد ديكوري على الزوايا (بجانب اليمين واليسار بعيداً عن الوجه) -->
+    <!-- زوايا الورد والجماليات -->
     <div class="corner-rose-right">🌹</div>
     <div class="corner-rose-left">🌹</div>
 
-    <!-- شريط المهام الاحترافي (واجهة SKLauncher Vibe) -->
+    <!-- شريط المهام الاحترافي -->
     <nav class="taskbar">
         <div class="taskbar-brand">
             ⚡ <span id="t-title">منصتي الثقافية العالمية</span>
         </div>
         <div class="taskbar-menu">
             <button onclick="toggleLanguage()">🌐 EN / AR</button>
-            <a href="#publishForm" id="t-nav-pub">مركز النشر</a>
-            <a href="#vipSection" style="color: var(--vip-gold); border-color: var(--vip-gold);">⭐ باقة VIP</a>
+            <a href="#publishSection" id="t-nav-pub">مركز النشر</a>
+            <a href="#cartSection" id="t-nav-cart" style="color: var(--success); border-color: var(--success);">🛒 السلة (<span id="cartCount">0</span>)</a>
+            <a href="#vipSection" style="color: var(--vip-gold); border-color: var(--vip-gold);">⭐ VIP</a>
         </div>
     </nav>
 
@@ -298,87 +343,130 @@
         <div class="card profile-card">
             <div class="profile-avatar">👤</div>
             <div>
-                <h3 style="margin: 0 0 5px 0; color: var(--accent);">ملفك الشخصي (الكاتب النشط)</h3>
-                <p style="margin: 0; color: var(--text-muted);">أهلاً بك مجدداً! قم بإدارة أعمالك، تتبع أرباحك، وانشر إبداعاتك مباشرة لجمهورك.</p>
+                <h3 style="margin: 0 0 5px 0; color: var(--accent);">ملفك الشخصي (الكاتب والناشر)</h3>
+                <p style="margin: 0; color: var(--text-muted);">تحكم بمقالاتك، قصصك، كتبك وإعلاناتك، وتابع تفاعلات وزوار منصتك بسهولة.</p>
             </div>
         </div>
 
-        <!-- شريط البحث السريع -->
+        <!-- شريط البحث -->
         <div class="search-box">
-            <input type="text" id="searchInput" onkeyup="searchArticles()" placeholder="ابحث عن مقالة، قصة، أو كتاب معين...">
+            <input type="text" id="searchInput" onkeyup="searchArticles()" placeholder="ابحث عن مقالة، قصة، كتاب، أو إعلان...">
         </div>
 
         <!-- قسم الـ VIP والخصومات (20% إلى 50%) -->
         <div class="card vip-box" id="vipSection">
             <h2 style="color: var(--vip-gold); margin-top:0;">⭐ مميزات عضوية الـ VIP (20$ / شهرياً)</h2>
-            <p style="color: #cbd5e1;">ارتقِ بمشروعك وافتح أبواب الإبداع اللامحدود مع ميزاتنا الخارقة:</p>
-            
+            <p style="color: #cbd5e1;">ارتقِ بمشروعك وافتح أبواب الإبداع اللامحدود:</p>
             <div class="vip-features">
-                <div class="feature-item">🎨 <b>تصميم كرتون وأنيماشن:</b> حول قصتك إلى رسومات وشخصيات كرتونية.</div>
-                <div class="feature-item">📢 <b>صانع الإعلانات:</b> تصميم إعلانات احترافية ومبتكرة لترويج كتبك.</div>
-                <div class="feature-item">✂️ <b>قص وتركيب الصور:</b> أداة ذكية لتعديل الأغلفة والصور باحترافية.</div>
-                <div class="feature-item">👾 <b>محرر بكسل (Pixel Art):</b> ارسم تصاميم كلاسيكية فريدة من نوعها.</div>
-                <div class="feature-item">💎 <b>محرر نصي مطور:</b> تحكم كامل بالخطوط والألوان والتنسيقات.</div>
-                <div class="feature-item">🏷️ <b>خصومات حصرية:</b> تفعيل تخفيضات الكتب لمشتركي VIP (من 20% ولغاية 50% كحد أقصى).</div>
+                <div class="feature-item">🎨 <b>تصميم كرتون وأنيماشن:</b> تحويل القصص لرسومات.</div>
+                <div class="feature-item">📢 <b>صانع الإعلانات:</b> ترويج احترافي للكتب والخدمات.</div>
+                <div class="feature-item">✂️ <b>قص وتركيب الصور:</b> تعديل الأغلفة باحترافية.</div>
+                <div class="feature-item">🏷️ <b>خصومات حصرية:</b> تفعيل تخفيضات الكتب لمشتركي VIP (من 20% لغاية 50%).</div>
             </div>
-
-            <button class="btn btn-vip" onclick="alert('جاري تجهيز محفظتك الآمنة وبوابة الدفع لتفعيل حسابك وسحب أرباحك بكل سهولة!')">اشترك الآن في باقة VIP</button>
+            <button class="btn btn-vip" onclick="alert('تم بدء تفعيل باقة VIP، جاري الربط ببوابة الدفع الآمنة!')">اشترك الآن في باقة VIP</button>
         </div>
 
-        <!-- مركز النشر الفوري والمحرر -->
-        <div class="section-title" id="t-publish-sec">مركز النشر والتأليف</div>
-        <div class="card">
-            <h3 id="t-pub-heading">انشر كتابك أو مقالك الآن فوراً</h3>
-            <p id="t-pub-sub" style="color: var(--text-muted);">املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP الخاصة بك (من 20% لغاية 50%):</p>
+        <!-- مركز النشر والتأليف (حسب الأقسام) -->
+        <div class="section-title" id="t-publish-sec">مركز النشر والأقسام</div>
+        <div class="card" id="publishSection">
+            <h3 id="t-pub-heading">انشر عملك الآن (مقالة، قصة، كتاب، أو إعلان)</h3>
+            <p id="t-pub-sub" style="color: var(--text-muted);">حدد القسم، السعر، ونسبة خصم الـ VIP (من 20% إلى 50%):</p>
             
             <form id="publishForm" onsubmit="publishArticle(event)">
-                <input type="text" id="input-name" placeholder="اسم الكاتب أو المؤلف" required>
-                <input type="text" id="input-title" placeholder="عنوان المقال أو القصة أو الكتاب" required>
+                <input type="text" id="input-name" placeholder="اسم الكاتب أو الناشر" required>
+                <input type="text" id="input-title" placeholder="عنوان العمل أو الإعلان" required>
                 
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" id="input-price" placeholder="السعر الأساسي (مثلاً: مجاناً أو 10$)" required style="flex:1;">
-                    <select id="input-discount" style="flex:1;" required>
-                        <option value="" disabled selected>اختر نسبة خصم VIP (من 20% إلى 50%)</option>
-                        <option value="20%">خصم 20% لمشتركي VIP</option>
-                        <option value="25%">خصم 25% لمشتركي VIP</option>
-                        <option value="30%">خصم 30% لمشتركي VIP</option>
-                        <option value="35%">خصم 35% لمشتركي VIP</option>
-                        <option value="40%">خصم 40% لمشتركي VIP</option>
-                        <option value="45%">خصم 45% لمشتركي VIP</option>
-                        <option value="50%">خصم 50% لمشتركي VIP (الحد الأقصى)</option>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <select id="input-category" style="flex:1; min-width: 200px;" required>
+                        <option value="" disabled selected>اختر القسم (نوع المحتوى)</option>
+                        <option value="مقالة">مقالة ثقافة وفكر</option>
+                        <option value="قصة">قصة ورواية</option>
+                        <option value="كتاب">كتاب علمي أو أدبي</option>
+                        <option value="إعلان">إعلان ترويجي / خدمة كتابة</option>
                     </select>
+                    <input type="text" id="input-price" placeholder="السعر (مثلاً: مجاناً أو 10$)" required style="flex:1; min-width: 200px;">
                 </div>
 
-                <!-- محرر النصوص (شبيه الوورد بتصميم خفيف ومطور) -->
+                <select id="input-discount" required>
+                    <option value="" disabled selected>اختر نسبة خصم VIP لمشتركي الباقة (من 20% إلى 50%)</option>
+                    <option value="20%">خصم 20% لمشتركي VIP</option>
+                    <option value="30%">خصم 30% لمشتركي VIP</option>
+                    <option value="40%">خصم 40% لمشتركي VIP</option>
+                    <option value="50%">خصم 50% لمشتركي VIP (الحد الأقصى)</option>
+                </select>
+
+                <!-- محرر النصوص الجانبي -->
                 <div class="editor-wrapper">
                     <label style="font-weight: bold; display:block; margin-bottom:5px; color: var(--accent);" id="t-editor-label">محرر النصوص:</label>
                     <div class="editor-toolbar">
                         <button type="button" onclick="formatText('bold')"><b>B</b> (غامق)</button>
                         <button type="button" onclick="formatText('italic')"><i>I</i> (مائل)</button>
                         <button type="button" onclick="formatText('underline')"><u>U</u> (تحته خط)</button>
-                        <select onchange="formatDoc('fontSize', this.value)">
-                            <option value="3">حجم الخط</option>
-                            <option value="4">متوسط</option>
-                            <option value="5">كبير</option>
-                        </select>
                     </div>
-                    <div id="wordEditor" class="editable-area" contenteditable="true">اكتب نص قصتك، كتابك، أو إعلانك هنا بكل حرية...</div>
+                    <div id="wordEditor" class="editable-area" contenteditable="true">اكتب تفاصيل كتابك، قصتك، مقالك، أو إعلانك هنا...</div>
                 </div>
 
-                <button type="submit" class="btn" style="margin-top: 15px;" id="t-submit-btn">نشر فوري على الموقع</button>
+                <button type="submit" class="btn" style="margin-top: 15px;" id="t-submit-btn">نشر العمل فوراً</button>
             </form>
         </div>
 
-        <!-- قائمة الكتب والمقالات -->
-        <div class="section-title" id="t-latest">أحدث الكتب والمقالات المنشورة</div>
+        <!-- تصفية الأقسام (فلترة الكتب، المقالات، القصص، والإعلانات) -->
+        <div class="tabs-header">
+            <button class="tab-btn active" onclick="filterCategory('الكل', this)">جميع الأعمال</button>
+            <button class="tab-btn" onclick="filterCategory('مقالة', this)">المقالات</button>
+            <button class="tab-btn" onclick="filterCategory('قصة', this)">القصص</button>
+            <button class="tab-btn" onclick="filterCategory('كتاب', this)">الكتب</button>
+            <button class="tab-btn" onclick="filterCategory('إعلان', this)">الإعلانات والخدمات</button>
+        </div>
+
+        <!-- قائمة الكتب والمقالات المعروضة -->
+        <div class="section-title" id="t-latest">الأعمال المنشورة حالياً</div>
         <div id="articlesContainer" class="article-grid">
-            <div class="article-item">
+            <div class="article-item" data-category="كتاب">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="badge-type">كتاب</span>
+                    <span class="discount-badge">خصم VIP: 40%</span>
+                </div>
                 <h3>رحلة في عالم البرمجة المتقدمة</h3>
-                <p><strong style="color: var(--text-muted);">الكاتب:</strong> محمد أحمد | <strong style="color: var(--accent);">السعر:</strong> 10$ | <span class="discount-badge">خصم VIP: 40%</span></p>
+                <p><strong style="color: var(--text-muted);">الكاتب:</strong> محمد أحمد | <strong style="color: var(--accent);">السعر:</strong> 10$</p>
                 <p>كيف تبني منصة ضخمة وتدير خوادمك بأمان تام...</p>
-                <div style="margin-top: 10px; background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
-                    <span class="admin-badge">تقييم الإدارة: 10 / 10</span>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--accent);">تعليق المدير: محتوى احترافي ومقبول للنشر الفوري!</p>
+                <button class="btn btn-cart" onclick="addToCart('رحلة في عالم البرمجة المتقدمة', '10$')">🛒 إضافة إلى سلة الشراء</button>
+            </div>
+            
+            <div class="article-item" data-category="إعلان">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="badge-type" style="background: #f59e0b;">إعلان</span>
+                    <span class="discount-badge">خصم VIP: 50%</span>
+                </div>
+                <h3>خدمة تصميم وتنسيق الإعلانات الاحترافية</h3>
+                <p><strong style="color: var(--text-muted);">الناشر:</strong> استوديو المبدعين | <strong style="color: var(--accent);">السعر:</strong> 15$</p>
+                <p>تواصل معنا لنصمم لك إعلاناً مميزاً لترويج كتابك أو قصتك بأسعار تنافسية!</p>
+                <button class="btn btn-cart" onclick="addToCart('خدمة تصميم الإعلانات', '15$')">🛒 طلب الخدمة (إضافة للسلة)</button>
+            </div>
+        </div>
+
+        <!-- قسم عربية الشراء (سلة التسوق) -->
+        <div class="card" id="cartSection" style="margin-top: 40px; border: 2px solid var(--success);">
+            <h3 style="color: var(--success); margin-top: 0;">🛒 زاوية عربة الشراء (السلة)</h3>
+            <p style="color: var(--text-muted);">الأعمال والخدمات التي أضفتها لتتمكن من إتمام شرائها:</p>
+            <div id="cartItemsList" style="background: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid var(--border); min-height: 80px; margin-bottom: 15px;">
+                <span style="color: var(--text-muted);">السلة فارغة حالياً... تصفح الأعمال وأضف ما يعجبك.</span>
+            </div>
+            <button class="btn btn-cart" onclick="checkoutCart()">إتمام عملية الشراء بأمان</button>
+        </div>
+
+        <!-- قسم الرسائل والتواصل المباشر بين الأعضاء والكتّاب -->
+        <div class="card" style="margin-top: 30px;">
+            <h3 style="color: var(--accent); margin-top: 0;">💬 غرفة التواصل والدردشة بين الأعضاء والناشرين</h3>
+            <p style="color: var(--text-muted);">هل تريد طلب إعلان خاص أو التواصل مع كاتب لتنسيق كتابك؟ اكتب رسالتك هنا:</p>
+            
+            <div class="chat-box">
+                <div id="chatMessages" class="chat-messages">
+                    <div style="color: var(--text-muted);"><b>النظام:</b> مرحباً بك في ركن المراسلة. يمكنك الاتفاق مع الناشرين والكتّاب هنا مباشرة.</div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <input type="text" id="chatInput" placeholder="اكتب رسالتك أو طلبك للكاتب هنا..." style="margin: 0; flex: 1;">
+                    <button class="btn" onclick="sendChatMessage()">إرسال</button>
                 </div>
             </div>
         </div>
@@ -390,19 +478,19 @@
     </footer>
 
     <script>
+        let cart = [];
+
         function formatText(command) {
             document.execCommand(command, false, null);
         }
-        function formatDoc(command, value) {
-            document.execCommand(command, false, value);
-        }
 
-        // نشر المقال بشكل فوري مع نسبة الخصم المحددة
+        // نشر العمل وتصنيفه حسب القسم المطلوب
         function publishArticle(event) {
             event.preventDefault();
             
             const name = document.getElementById('input-name').value;
             const title = document.getElementById('input-title').value;
+            const category = document.getElementById('input-category').value;
             const price = document.getElementById('input-price').value;
             const discount = document.getElementById('input-discount').value;
             const content = document.getElementById('wordEditor').innerHTML;
@@ -410,20 +498,77 @@
             const container = document.getElementById('articlesContainer');
             const newArticle = document.createElement('div');
             newArticle.className = 'article-item';
+            newArticle.setAttribute('data-category', category);
+            
+            let badgeBg = '#3b82f6';
+            if(category === 'إعلان') badgeBg = '#f59e0b';
+            if(category === 'قصة') badgeBg = '#ec4899';
+            if(category === 'كتاب') badgeBg = '#8b5cf6';
+
             newArticle.innerHTML = `
-                <h3>${title}</h3>
-                <p><strong style="color: var(--text-muted);">الكاتب:</strong> ${name} | <strong style="color: var(--accent);">السعر:</strong> ${price} | <span class="discount-badge">خصم VIP: ${discount}</span></p>
-                <div style="margin: 10px 0;">${content}</div>
-                <div style="margin-top: 10px; background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
-                    <span class="admin-badge">تقييم الإدارة: 10 / 10</span>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--accent);">تعليق المدير: تم اعتماد النشر الفوري بنجاح!</p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="badge-type" style="background: ${badgeBg};">${category}</span>
+                    <span class="discount-badge">خصم VIP: ${discount}</span>
                 </div>
+                <h3>${title}</h3>
+                <p><strong style="color: var(--text-muted);">الكاتب/الناشر:</strong> ${name} | <strong style="color: var(--accent);">السعر:</strong> ${price}</p>
+                <div style="margin: 10px 0;">${content}</div>
+                <button class="btn btn-cart" onclick="addToCart('${title}', '${price}')">🛒 إضافة إلى سلة الشراء</button>
             `;
 
             container.prepend(newArticle);
             document.getElementById('publishForm').reset();
-            document.getElementById('wordEditor').innerHTML = 'اكتب نص قصتك، كتابك، أو إعلانك هنا بكل حرية...';
-            alert('تم نشر عملك بنجاح وأصبح متاحاً لكل الزوار مع نسبة التخفيض المحددة!');
+            document.getElementById('wordEditor').innerHTML = 'اكتب تفاصيل كتابك، قصتك، مقالك، أو إعلانك هنا...';
+            alert('تم نشر عملك في قسم (' + category + ') بنجاح وأصبح متاحاً للزوار!');
+        }
+
+        // فلترة وعرض حسب الأقسام
+        function filterCategory(cat, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            let articles = document.getElementsByClassName('article-item');
+            for (let i = 0; i < articles.length; i++) {
+                let itemCategory = articles[i].getAttribute('data-category');
+                if (cat === 'الكل' || itemCategory === cat) {
+                    articles[i].style.display = "";
+                } else {
+                    articles[i].style.display = "none";
+                }
+            }
+        }
+
+        // إضافة عناصر لسلة الشراء (العرباية)
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            document.getElementById('cartCount').innerText = cart.length;
+            updateCartUI();
+            alert('تمت إضافة ("' + title + '") إلى سلة الشراء بنجاح!');
+        }
+
+        function updateCartUI() {
+            let list = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                list.innerHTML = '<span style="color: var(--text-muted);">السلة فارغة حالياً... تصفح الأعمال وأضف ما يعجبك.</span>';
+                return;
+            }
+            let html = '<ul style="margin: 0; padding-right: 20px;">';
+            cart.forEach((item, index) => {
+                html += `<li style="margin-bottom: 5px;"><b>${item.title}</b> — السعر: <span style="color: var(--accent);">${item.price}</span></li>`;
+            });
+            html += '</ul>';
+            list.innerHTML = html;
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                alert('سلة الشراء فارغة!');
+                return;
+            }
+            alert('تم تجهيز طلبك بنجاح! سيتم تحويلك لبوابة الدفع الآمنة لإتمام الشراء.');
+            cart = [];
+            document.getElementById('cartCount').innerText = 0;
+            updateCartUI();
         }
 
         // محرك البحث الفوري
@@ -441,6 +586,24 @@
             }
         }
 
+        // إرسال الرسائل في الدردشة بين الأعضاء
+        function sendChatMessage() {
+            let input = document.getElementById('chatInput');
+            let text = input.value.trim();
+            if (text === '') return;
+
+            let chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML += `<div style="margin-top: 5px;">👤 <b>أنت:</b> ${text}</div>`;
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // رد تلقائي محاكاة للناشر
+            setTimeout(() => {
+                chatMessages.innerHTML += `<div style="margin-top: 5px; color: var(--accent);">📢 <b>الناشر/الكاتب:</b> أهلاً بك! تم استلام رسالتك بخصوص الإعلان أو الطلب، وسنتواصل معك لتحديد التفاصيل والسعر المناسب قريباً.</div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
         let currentLang = 'ar';
         function toggleLanguage() {
             const root = document.getElementById('html-root');
@@ -450,13 +613,10 @@
                 root.setAttribute('lang', 'en');
                 document.getElementById('t-title').innerText = "Global Cultural Platform";
                 document.getElementById('t-nav-pub').innerText = "Publish Center";
-                document.getElementById('searchInput').placeholder = "Search for an article, story, or book...";
-                document.getElementById('t-publish-sec').innerText = "Publishing Center";
-                document.getElementById('t-pub-heading').innerText = "Publish Your Book or Article Instantly";
-                document.getElementById('t-pub-sub').innerText = "Fill in details, set price and VIP discount (20% to 50%):";
-                document.getElementById('t-editor-label').innerText = "Text Editor:";
-                document.getElementById('t-submit-btn').innerText = "Publish Instantly Live";
-                document.getElementById('t-latest').innerText = "Latest Published Books & Articles";
+                document.getElementById('searchInput').placeholder = "Search for article, story, book, or ad...";
+                document.getElementById('t-publish-sec').innerText = "Publish Center & Categories";
+                document.getElementById('t-pub-heading').innerText = "Publish Your Work Instantly";
+                document.getElementById('t-latest').innerText = "Currently Published Works";
                 document.getElementById('t-footer').innerText = "All Rights Reserved © 2026 - Global Cultural Platform";
             } else {
                 currentLang = 'ar';
@@ -464,13 +624,10 @@
                 root.setAttribute('lang', 'ar');
                 document.getElementById('t-title').innerText = "منصتي الثقافية العالمية";
                 document.getElementById('t-nav-pub').innerText = "مركز النشر";
-                document.getElementById('searchInput').placeholder = "ابحث عن مقالة، قصة، أو كتاب معين...";
-                document.getElementById('t-publish-sec').innerText = "مركز النشر والتأليف";
-                document.getElementById('t-pub-heading').innerText = "انشر كتابك أو مقالك الآن فوراً";
-                document.getElementById('t-pub-sub').innerText = "املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP الخاصة بك (من 20% لغاية 50%):";
-                document.getElementById('t-editor-label').innerText = "محرر النصوص:";
-                document.getElementById('t-submit-btn').innerText = "نشر فوري على الموقع";
-                document.getElementById('t-latest').innerText = "أحدث الكتب والمقالات المنشورة";
+                document.getElementById('searchInput').placeholder = "ابحث عن مقالة، قصة، كتاب، أو إعلان...";
+                document.getElementById('t-publish-sec').innerText = "مركز النشر والأقسام";
+                document.getElementById('t-pub-heading').innerText = "انشر عملك الآن (مقالة، قصة، كتاب، أو إعلان)";
+                document.getElementById('t-latest').innerText = "الأعمال المنشورة حالياً";
                 document.getElementById('t-footer').innerText = "جميع الحقوق محفوظة © 2026 - منصتي الثقافية العالمية";
             }
         }
