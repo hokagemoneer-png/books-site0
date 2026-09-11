@@ -6,70 +6,106 @@
     <title data-lang-ar="منصتي الثقافية العالمية" data-lang-en="Global Cultural Platform">منصتي الثقافية العالمية</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #4f46e5;
-            --accent: #f59e0b;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --text-muted: #64748b;
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.2);
+            --vip-gold: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-main);
+            color: var(--text-main);
             transition: 0.3s;
         }
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        
+        /* شريط المهام المودرن (واجهة SKLauncher vibe) */
+        nav.taskbar {
+            background: #090d16;
+            border-bottom: 1px solid var(--border);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-        .lang-switcher {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+        .taskbar-brand {
+            font-weight: bold;
+            font-size: 1.25em;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .lang-switcher button {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid white;
-            color: white;
+        .taskbar-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .taskbar-menu button, .taskbar-menu a {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
             padding: 6px 14px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: 0.2s;
         }
+        .taskbar-menu button:hover, .taskbar-menu a:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        /* ورد زوايا الموقع (موزع بيسار ويسار ووسط بشكل ديكوري) */
+        .corner-rose-right, .corner-rose-left {
+            position: fixed;
+            font-size: 2.5em;
+            z-index: 99;
+            opacity: 0.8;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.4));
+        }
+        .corner-rose-right { top: 80px; right: 20px; transform: rotate(15deg); }
+        .corner-rose-left { bottom: 30px; left: 20px; transform: rotate(-15deg); }
+
         .container {
             max-width: 1050px;
             margin: 30px auto;
             padding: 20px;
         }
+
+        /* كروت الواجهة المظلمة */
         .card {
-            background: var(--card-bg);
+            background: var(--bg-card);
             padding: 25px;
             margin-bottom: 25px;
             border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
         }
         .section-title {
-            font-size: 1.5em;
+            font-size: 1.4em;
             margin-bottom: 20px;
-            color: var(--primary);
-            border-bottom: 2px solid #e2e8f0;
+            color: var(--accent);
+            border-bottom: 2px solid var(--border);
             padding-bottom: 8px;
             font-weight: bold;
         }
         .btn {
             display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 24px;
+            background-color: var(--accent);
+            color: #0f172a;
+            padding: 10px 20px;
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
@@ -80,11 +116,14 @@
         .btn:hover {
             opacity: 0.9;
             transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
         .btn-vip {
             background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
         }
-        
+
+        /* صندوق البحث */
         .search-box {
             display: flex;
             gap: 10px;
@@ -93,15 +132,43 @@
         .search-box input {
             flex: 1;
             padding: 12px 15px;
-            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 1em;
+            color: white;
             outline: none;
         }
+        .search-box input:focus {
+            border-color: var(--accent);
+        }
 
+        /* قسم البروفايل الشخصي للكاتب */
+        .profile-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid var(--border);
+        }
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            background: var(--accent);
+            color: #0f172a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* محرر النصوص الجانبي */
         .editor-wrapper {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            border: 1px solid var(--border);
             border-radius: 8px;
             padding: 15px;
             margin-top: 10px;
@@ -111,41 +178,47 @@
             gap: 6px;
             margin-bottom: 10px;
             flex-wrap: wrap;
-            background: #e2e8f0;
+            background: #1e293b;
             padding: 8px;
             border-radius: 6px;
+            border: 1px solid var(--border);
         }
         .editor-toolbar button, .editor-toolbar select {
             padding: 5px 10px;
-            background: white;
-            color: var(--text);
-            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: var(--text-main);
+            border: 1px solid var(--border);
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
         }
         .editable-area {
             min-height: 140px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border);
             padding: 12px;
             border-radius: 6px;
-            background: white;
-            color: var(--text);
+            background: #0f172a;
+            color: var(--text-main);
             outline: none;
         }
         input, textarea, select {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border);
             border-radius: 8px;
             box-sizing: border-box;
-            background: white;
-            color: var(--text);
+            background: #0f172a;
+            color: var(--text-main);
         }
+        input:focus, select:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
         .vip-box {
-            background: linear-gradient(135deg, #fffbeb, #fef3c7);
-            border: 2px dashed #f59e0b;
+            background: linear-gradient(135deg, #272115, #1e293b);
+            border: 2px dashed var(--vip-gold);
         }
         .vip-features {
             display: grid;
@@ -154,10 +227,10 @@
             margin: 15px 0;
         }
         .feature-item {
-            background: white;
+            background: #0f172a;
             padding: 12px;
             border-radius: 8px;
-            border: 1px solid #fde68a;
+            border: 1px solid #453514;
             font-size: 0.95em;
         }
         .article-grid {
@@ -165,86 +238,105 @@
             gap: 20px;
         }
         .article-item {
-            background: white;
+            background: var(--bg-card);
             padding: 20px;
             border-radius: 8px;
-            border-right: 5px solid var(--primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
+            border-right: 5px solid var(--accent);
+            border-top: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
         .admin-badge {
-            background: #fef3c7;
-            color: #b45309;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--vip-gold);
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.85em;
             font-weight: bold;
-            border: 1px solid #fde68a;
+            border: 1px solid rgba(245, 158, 11, 0.3);
         }
         .discount-badge {
-            background: #dbeafe;
-            color: #1e40af;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.85em;
             font-weight: bold;
-            border: 1px solid #bfdbfe;
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
         footer {
             text-align: center;
             padding: 25px;
-            background-color: #1e293b;
-            color: #94a3b8;
+            background-color: #090d16;
+            color: var(--text-muted);
             margin-top: 40px;
+            border-top: 1px solid var(--border);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="lang-switcher">
-            <button onclick="toggleLanguage()">🌐 EN / AR</button>
+    <!-- ورد ديكوري على الزوايا (بجانب اليمين واليسار بعيداً عن الوجه) -->
+    <div class="corner-rose-right">🌹</div>
+    <div class="corner-rose-left">🌹</div>
+
+    <!-- شريط المهام الاحترافي (واجهة SKLauncher Vibe) -->
+    <nav class="taskbar">
+        <div class="taskbar-brand">
+            ⚡ <span id="t-title">منصتي الثقافية العالمية</span>
         </div>
-        <h1 id="t-title">منصتي الثقافية العالمية</h1>
-        <p id="t-subtitle">انشر إبداعاتك، صمم قصتك، وشارك كتبك مع العالم بكل حرية</p>
-    </header>
+        <div class="taskbar-menu">
+            <button onclick="toggleLanguage()">🌐 EN / AR</button>
+            <a href="#publishForm" id="t-nav-pub">مركز النشر</a>
+            <a href="#vipSection" style="color: var(--vip-gold); border-color: var(--vip-gold);">⭐ باقة VIP</a>
+        </div>
+    </nav>
 
     <div class="container">
         
+        <!-- بروفايل الكاتب الشخصي -->
+        <div class="card profile-card">
+            <div class="profile-avatar">👤</div>
+            <div>
+                <h3 style="margin: 0 0 5px 0; color: var(--accent);">ملفك الشخصي (الكاتب النشط)</h3>
+                <p style="margin: 0; color: var(--text-muted);">أهلاً بك مجدداً! قم بإدارة أعمالك، تتبع أرباحك، وانشر إبداعاتك مباشرة لجمهورك.</p>
+            </div>
+        </div>
+
         <!-- شريط البحث السريع -->
         <div class="search-box">
             <input type="text" id="searchInput" onkeyup="searchArticles()" placeholder="ابحث عن مقالة، قصة، أو كتاب معين...">
         </div>
 
-        <!-- قسم الاشتراك الشهري والميزات الخرافية VIP -->
-        <div class="card vip-box">
-            <h2 style="color: #b45309; margin-top:0;">⭐ مميزات عضوية الـ VIP (20$ / شهرياً)</h2>
-            <p style="color: #78350f;">ارتقِ بمشروعك وافتح أبواب الإبداع اللامحدود مع ميزاتنا الخارقة:</p>
+        <!-- قسم الـ VIP والخصومات (20% إلى 50%) -->
+        <div class="card vip-box" id="vipSection">
+            <h2 style="color: var(--vip-gold); margin-top:0;">⭐ مميزات عضوية الـ VIP (20$ / شهرياً)</h2>
+            <p style="color: #cbd5e1;">ارتقِ بمشروعك وافتح أبواب الإبداع اللامحدود مع ميزاتنا الخارقة:</p>
             
             <div class="vip-features">
                 <div class="feature-item">🎨 <b>تصميم كرتون وأنيماشن:</b> حول قصتك إلى رسومات وشخصيات كرتونية.</div>
                 <div class="feature-item">📢 <b>صانع الإعلانات:</b> تصميم إعلانات احترافية ومبتكرة لترويج كتبك.</div>
                 <div class="feature-item">✂️ <b>قص وتركيب الصور:</b> أداة ذكية لتعديل الأغلفة والصور باحترافية.</div>
                 <div class="feature-item">👾 <b>محرر بكسل (Pixel Art):</b> ارسم تصاميم كلاسيكية فريدة من نوعها.</div>
-                <div class="feature-item">💎 <b>محرر نصي مطور:</b> تحكم كامل بالخطوط والألوان والتنسيقات العالمية.</div>
-                <div class="feature-item">🏷️ <b>خصومات حصرية:</b> استفد من تخفيضات الكتب التي تبدأ من 20% وتصل حتى 50%!</div>
+                <div class="feature-item">💎 <b>محرر نصي مطور:</b> تحكم كامل بالخطوط والألوان والتنسيقات.</div>
+                <div class="feature-item">🏷️ <b>خصومات حصرية:</b> تفعيل تخفيضات الكتب لمشتركي VIP (من 20% ولغاية 50% كحد أقصى).</div>
             </div>
 
-            <button class="btn btn-vip" onclick="alert('جاري تجهيز محفظتك الآمنة وبوابة الدفع (Stripe / PayPal) لتفعيل حسابك وسحب أرباحك بكل سهولة!')">اشترك الآن في باقة VIP</button>
+            <button class="btn btn-vip" onclick="alert('جاري تجهيز محفظتك الآمنة وبوابة الدفع لتفعيل حسابك وسحب أرباحك بكل سهولة!')">اشترك الآن في باقة VIP</button>
         </div>
 
-        <!-- مركز النشر الفوري والمحرر الجانبي -->
+        <!-- مركز النشر الفوري والمحرر -->
         <div class="section-title" id="t-publish-sec">مركز النشر والتأليف</div>
         <div class="card">
             <h3 id="t-pub-heading">انشر كتابك أو مقالك الآن فوراً</h3>
-            <p id="t-pub-sub" style="color: var(--text-muted);">املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP (من 20% كحد أدنى إلى 50% كحد أقصى):</p>
+            <p id="t-pub-sub" style="color: var(--text-muted);">املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP الخاصة بك (من 20% لغاية 50%):</p>
             
             <form id="publishForm" onsubmit="publishArticle(event)">
                 <input type="text" id="input-name" placeholder="اسم الكاتب أو المؤلف" required>
                 <input type="text" id="input-title" placeholder="عنوان المقال أو القصة أو الكتاب" required>
                 
                 <div style="display: flex; gap: 10px;">
-                    <input type="text" id="input-price" placeholder="السعر (مثلاً: مجاناً أو 10$)" required style="flex:1;">
+                    <input type="text" id="input-price" placeholder="السعر الأساسي (مثلاً: مجاناً أو 10$)" required style="flex:1;">
                     <select id="input-discount" style="flex:1;" required>
                         <option value="" disabled selected>اختر نسبة خصم VIP (من 20% إلى 50%)</option>
                         <option value="20%">خصم 20% لمشتركي VIP</option>
@@ -253,13 +345,13 @@
                         <option value="35%">خصم 35% لمشتركي VIP</option>
                         <option value="40%">خصم 40% لمشتركي VIP</option>
                         <option value="45%">خصم 45% لمشتركي VIP</option>
-                        <option value="50%">خصم 50% لمشتركي VIP</option>
+                        <option value="50%">خصم 50% لمشتركي VIP (الحد الأقصى)</option>
                     </select>
                 </div>
 
-                <!-- محرر النصوص (شبه الوورد في صندوق مرتب وجانبي) -->
+                <!-- محرر النصوص (شبيه الوورد بتصميم خفيف ومطور) -->
                 <div class="editor-wrapper">
-                    <label style="font-weight: bold; display:block; margin-bottom:5px; color: var(--primary);" id="t-editor-label">محرر النصوص (شبه الوورد المطور):</label>
+                    <label style="font-weight: bold; display:block; margin-bottom:5px; color: var(--accent);" id="t-editor-label">محرر النصوص:</label>
                     <div class="editor-toolbar">
                         <button type="button" onclick="formatText('bold')"><b>B</b> (غامق)</button>
                         <button type="button" onclick="formatText('italic')"><i>I</i> (مائل)</button>
@@ -282,11 +374,11 @@
         <div id="articlesContainer" class="article-grid">
             <div class="article-item">
                 <h3>رحلة في عالم البرمجة المتقدمة</h3>
-                <p><strong style="color: var(--text-muted);">الكاتب:</strong> محمد أحمد | <strong style="color: var(--primary);">السعر:</strong> 10$ | <span class="discount-badge">خصم VIP: 40%</span></p>
+                <p><strong style="color: var(--text-muted);">الكاتب:</strong> محمد أحمد | <strong style="color: var(--accent);">السعر:</strong> 10$ | <span class="discount-badge">خصم VIP: 40%</span></p>
                 <p>كيف تبني منصة ضخمة وتدير خوادمك بأمان تام...</p>
-                <div style="margin-top: 10px; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <div style="margin-top: 10px; background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
                     <span class="admin-badge">تقييم الإدارة: 10 / 10</span>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--primary);">تعليق المدير: محتوى رائع جداً ومقبول للنشر الفوري!</p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--accent);">تعليق المدير: محتوى احترافي ومقبول للنشر الفوري!</p>
                 </div>
             </div>
         </div>
@@ -305,7 +397,7 @@
             document.execCommand(command, false, value);
         }
 
-        // نشر المقال بشكل فوري مع نسبة الخصم
+        // نشر المقال بشكل فوري مع نسبة الخصم المحددة
         function publishArticle(event) {
             event.preventDefault();
             
@@ -320,18 +412,18 @@
             newArticle.className = 'article-item';
             newArticle.innerHTML = `
                 <h3>${title}</h3>
-                <p><strong style="color: var(--text-muted);">الكاتب:</strong> ${name} | <strong style="color: var(--primary);">السعر:</strong> ${price} | <span class="discount-badge">خصم VIP: ${discount}</span></p>
-                <div>${content}</div>
-                <div style="margin-top: 10px; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <p><strong style="color: var(--text-muted);">الكاتب:</strong> ${name} | <strong style="color: var(--accent);">السعر:</strong> ${price} | <span class="discount-badge">خصم VIP: ${discount}</span></p>
+                <div style="margin: 10px 0;">${content}</div>
+                <div style="margin-top: 10px; background: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
                     <span class="admin-badge">تقييم الإدارة: 10 / 10</span>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--primary);">تعليق المدير: تم اعتماد النشر الفوري، عمل ممتاز!</p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9em; color: var(--accent);">تعليق المدير: تم اعتماد النشر الفوري بنجاح!</p>
                 </div>
             `;
 
             container.prepend(newArticle);
             document.getElementById('publishForm').reset();
             document.getElementById('wordEditor').innerHTML = 'اكتب نص قصتك، كتابك، أو إعلانك هنا بكل حرية...';
-            alert('تم نشر عملك بنجاح وأصبح متاحاً لكل الزوار مع نسبة الخصم المحددة!');
+            alert('تم نشر عملك بنجاح وأصبح متاحاً لكل الزوار مع نسبة التخفيض المحددة!');
         }
 
         // محرك البحث الفوري
@@ -357,12 +449,12 @@
                 root.setAttribute('dir', 'ltr');
                 root.setAttribute('lang', 'en');
                 document.getElementById('t-title').innerText = "Global Cultural Platform";
-                document.getElementById('t-subtitle').innerText = "Publish your creations, design stories, and share books globally";
+                document.getElementById('t-nav-pub').innerText = "Publish Center";
                 document.getElementById('searchInput').placeholder = "Search for an article, story, or book...";
                 document.getElementById('t-publish-sec').innerText = "Publishing Center";
                 document.getElementById('t-pub-heading').innerText = "Publish Your Book or Article Instantly";
-                document.getElementById('t-pub-sub').innerText = "Fill in details, set price and VIP discount (from 20% to 50%):";
-                document.getElementById('t-editor-label').innerText = "Text Editor (Advanced Word):";
+                document.getElementById('t-pub-sub').innerText = "Fill in details, set price and VIP discount (20% to 50%):";
+                document.getElementById('t-editor-label').innerText = "Text Editor:";
                 document.getElementById('t-submit-btn').innerText = "Publish Instantly Live";
                 document.getElementById('t-latest').innerText = "Latest Published Books & Articles";
                 document.getElementById('t-footer').innerText = "All Rights Reserved © 2026 - Global Cultural Platform";
@@ -371,12 +463,12 @@
                 root.setAttribute('dir', 'rtl');
                 root.setAttribute('lang', 'ar');
                 document.getElementById('t-title').innerText = "منصتي الثقافية العالمية";
-                document.getElementById('t-subtitle').innerText = "انشر إبداعاتك، صمم قصتك، وشارك كتبك مع العالم بكل حرية";
+                document.getElementById('t-nav-pub').innerText = "مركز النشر";
                 document.getElementById('searchInput').placeholder = "ابحث عن مقالة، قصة، أو كتاب معين...";
                 document.getElementById('t-publish-sec').innerText = "مركز النشر والتأليف";
                 document.getElementById('t-pub-heading').innerText = "انشر كتابك أو مقالك الآن فوراً";
-                document.getElementById('t-pub-sub').innerText = "املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP (من 20% كحد أدنى إلى 50% كحد أقصى):";
-                document.getElementById('t-editor-label').innerText = "محرر النصوص (شبه الوورد المطور):";
+                document.getElementById('t-pub-sub').innerText = "املأ التفاصيل وحدد السعر ونسبة تخفيض الـ VIP الخاصة بك (من 20% لغاية 50%):";
+                document.getElementById('t-editor-label').innerText = "محرر النصوص:";
                 document.getElementById('t-submit-btn').innerText = "نشر فوري على الموقع";
                 document.getElementById('t-latest').innerText = "أحدث الكتب والمقالات المنشورة";
                 document.getElementById('t-footer').innerText = "جميع الحقوق محفوظة © 2026 - منصتي الثقافية العالمية";
